@@ -1,43 +1,45 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+let lightbox;
 
-export function renderImages(images, gallery) {
-  const markup = images
-    .map(
-      ({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        return `
-      <li class="gallery-item">
-        <a href="${largeImageURL}" class="gallery-link">
-          <img src="${webformatURL}" alt="${tags}" class="gallery-image" />
-        </a>
-        <div class="image-info">
-          <div><b>Likes:</b> ${likes}</div>
-          <div><b>Views:</b> ${views}</div>
-          <div><b>Comments:</b> ${comments}</div>
-          <div><b>Downloads:</b> ${downloads}</div>
+export function renderGallery(cards) {
+  return cards
+    .map(card => {
+      let {
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      } = card;
+      return `
+      <a href="${largeImageURL}" class="photo-card">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <div class="info">
+          <p><strong>Likes:</strong> ${likes}</p>
+          <p><strong>Views:</strong> ${views}</p>
+          <p><strong>Comments:</strong> ${comments}</p>
+          <p><strong>Downloads:</strong> ${downloads}</p>
         </div>
-      </li>`;
-      }
-    )
+      </a>
+    `;
+    })
     .join('');
-
-  gallery.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
 }
 
-export function clearGallery(gallery) {
-  gallery.innerHTML = '';
-}
-
-export function showLoader() {
-  document.querySelector('.loader-wrapper').classList.remove('is-hidden');
-}
-
-export function hideLoader() {
-  document.querySelector('.loader-wrapper').classList.add('is-hidden');
+export function initializeLightbox() {
+  if (lightbox) {
+    lightbox.refresh();
+  } else {
+    lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 150,
+      animationSpeed: 200,
+      closeText: '×',
+      navText: ['<', '>'],
+    });
+  }
 }
