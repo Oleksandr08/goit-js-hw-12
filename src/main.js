@@ -55,7 +55,6 @@ form.addEventListener('submit', async event => {
     });
     console.error('Error', error);
   } finally {
-    form.searchQuery.value = '';
     hideElement(loader);
     input.classList.remove('active');
   }
