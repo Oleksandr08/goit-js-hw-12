@@ -3,10 +3,10 @@ import 'izitoast/dist/css/iziToast.min.css';
 import { fetchImages } from './js/pixabay-api';
 import { renderGallery, initializeLightbox } from './js/render-functions';
 
-const form = document.querySelector('.search-form');
+const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('.loader-wrapper');
-const input = document.querySelector('.search-form input');
+const input = document.querySelector('.form input');
 const loadMore = document.querySelector('.load-more');
 
 const params = {
