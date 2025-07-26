@@ -40,13 +40,13 @@ body {
 }
 
 /* Search Form */
-.search-form {
+.form {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.search-form input {
+.form input {
   width: 100%;
   max-width: 400px;
   padding: 10px 15px;
@@ -57,7 +57,7 @@ body {
   transition: border-color 0.3s ease;
 }
 
-.search-form input.active {
+.form input.active {
   border-color: #1565c0;
 }
 
